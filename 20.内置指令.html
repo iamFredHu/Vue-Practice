@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - 内置指令</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="demo">
+    <div>{{ text }}</div>
+    <div v-text="text">这里的文字不会被输出</div>
+    <div v-html="html">这里的文字不会被输出</div>
+    <!-- v-html存在安全隐患 在网站上动态渲染HTML是非常危险的，容易导致XSS攻击 一定要在可信内容上使用v-html，一定不能再用户提交内容上 -->
+    <!-- v-cloak 指令：如果Vue.js没有加载出来，可以不显示未经解析的模板 Vue解析成功以后会删掉v-cloak属性-->
+    <h2 v-once>初始化n值{{ n }}</h2>
+    <!-- 只加载一次，内容在初次动态渲染之后被视为静态内容  -->
+    <h2>当前的n值是{{ n }}</h2>
+    <h2 v-pre>这一行没有动态内容，为纯静态内容</h2>
+    <button @click="n++">点我n+1</button>
+</div>
+
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+        el: '#demo',
+        data: function () {
+            return {
+                text: "测试文本1",
+                html: "<h3>测试文本2</h3>",
+                n: 1
+            }
+        }
+    })
+</script>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

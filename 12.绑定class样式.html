@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - 绑定Class样式</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .basic {
+            width: 200px;
+            height: 200px;
+            font-size: 40px;
+            color: white;
+            background-color: #8BC6EC;
+            background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+
+        }
+
+        .happy {
+            background-color: #0093E9;
+            background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+        }
+
+        .sad {
+            background-color: #8EC5FC;
+            background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+        }
+
+        .normal {
+            background-color: #D9AFD9;
+            background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+        }
+
+        .borderRa {
+            border-radius: 10px;
+        }
+
+        .borderChange {
+            border: 5px solid #97D9E1;
+        }
+
+        .fontFamily {
+            font-family: 宋体;
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+    <!-- 正常样式正常写，动态样式绑定写 v-bind: -->
+    <!-- 样式的类名，不确定，需要动态指定时使用这种方法：动态决定 -->
+    <!-- 三种写法：字符串、数组、对象 -->
+    <div class="basic" :class="mood" @click="moodChange">{{ name1 }}</div>
+    <br/><br/><br/>
+    <div class="basic" :class="classArr">{{ name2 }}</div>
+    <button @click.once="deleteS1">增加样式1</button>
+    <button @click.once="deleteS2">增加样式2</button>
+    <button @click.once="deleteS3">增加样式3</button>
+    <div class="basic" :class="classObj">{{ name3 }}</div>
+    <br/><br/><br/>
+    <div class="basic" :style=styleObj>{{ name4 }}</div>
+    <!-- 可以用数组应用多个Object -->
+</div>
+
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTip = false;
+
+    const vm = new Vue({
+        el: '#demo',
+        data: function () {
+            return {
+                name1: "改变样式",
+                name2: "删除样式",
+                name3: "对象方法",
+                name4: "style绑定",
+                mood: 'normal',
+                classArr: [],
+                storeArr: ['borderRa', 'borderChange', 'fontFamily'],
+                classObj: {
+                    borderRa: false,
+                    borderChange: false,
+                    fontFamily: false
+                },
+                styleObj: {
+                    fontSize: '50px',
+                    color: 'red'
+                }
+            };
+        },
+        methods: {
+            moodChange() {
+                const moodArr = ['happy', 'sad', 'normal'];
+                const moodIndex = Math.floor(Math.random() * 3); // floor 向下取整
+                this.mood = moodArr[moodIndex];
+            },
+            deleteS1() {
+                this.classArr.push('borderRa');
+            },
+            deleteS2() {
+                this.classArr.push('borderChange');
+            },
+            deleteS3() {
+                this.classArr.push('fontFamily');
+            }
+        }
+    });
+</script>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

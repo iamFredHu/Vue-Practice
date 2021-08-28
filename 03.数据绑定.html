@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - Model</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="demo">
+    单向数据绑定-数据只能从data流向页面：<input type="text" v-bind:value="text">
+    <!-- 更改网页中的输入框，name的值不会跟着改变-->
+    <br/>
+    双向数据绑定-应用在表单类，可以简写为v-model:数据在data和页面中双向流动：<input type="text" v-model:value="text">
+    <!-- 页面中的value发生变化，data中的值也会变化 -->
+    <!-- v-model只能应用在表单类（输入类）元素当中 -->
+</div>
+
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTip = false;
+
+    new Vue({
+        el: '#demo',
+        data: {
+            text: "Text1",
+        }
+    });
+</script>
+</html>

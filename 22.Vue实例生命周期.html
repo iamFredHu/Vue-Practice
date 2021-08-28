@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - Model</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="demo">
+    <div class="container">
+        <div class="jumbotron">
+            <h2 :style="{opacity}">哈尔滨工业大学（深圳）</h2>
+            <h3>当前的n值为 {{ n }}</h3>
+            <button @click="addValue" class="btn btn-primary">点我n++</button>
+            <button @click="stopChange" class="btn btn-primary">点我停止变化</button>
+        </div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTi = false
+
+    // template 不能有两个根节点 用一个div包装一下即可 (会替换整个demo div） 不能使用template作为根节点
+    new Vue({
+        el: '#demo',
+        data: function () {
+            return {
+                opacity: 1,
+                n: 1,
+                timer:''
+            }
+        },
+        methods: {
+            addValue() {
+                this.n++
+            },
+            stopChange(){
+                this.$destroy(this.timer)
+            }
+        },
+        beforeCreate() {
+            // 此时，无法通过vm访问到data中的数据和methods中的方法（数据代理还未开始）
+            console.log(this) // vm中没有data 没有开始收集数据 没有methods中的方法
+            // debugger;
+        },
+        created() {
+            // 初始化：数据监测、数据代理
+            // 此时可以通过vm访问到data中的数据和methods中的方法
+            console.log(this)
+        },
+        // 接下来看有没有el、template options
+        // 编译el的outerHTML（就是整个div 包括外边那个id='el value'的那个div），作为template
+        // 这个时候 Vue刚开始解析模板 生成虚拟（DOM）在内存中
+
+        // 挂载完毕 执行 函数
+        // Vue完成模板的解析，并且把真实DOM元素放入页面后（即挂载完毕），调用mounted
+
+        // 这些函数统称为生命周期函数（还有一些没写）
+        // 特殊时间点 Vue调用这些函数 这里的this指向就是vm（由Vue进行维护）
+        // 生命周期又名生命周期回调函数、生命周期钩子
+        // 名字不能变，但是函数的具体内容可以根据需求写
+        // this是 vm 或者 组件实例对象
+        beforeMount() {
+            // 此时页面还不能显示编译好的内容
+            // 已经解析完了，但是还没有往页面上放
+            // 所有对于DOM的操作最终都不会奏效
+        },
+        // 接下来创建vm.$el 替换掉 el中的内容（也就是虚拟DOM被转化为真实DOM）
+        mounted() {
+            this.timer = setInterval(() => {
+                this.opacity -= 0.01
+                if (this.opacity <= 0) this.opacity = 1
+            }, 16)
+        },
+        beforeDestroy(){
+            clearInterval(this.timer)
+        }
+    })
+</script>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

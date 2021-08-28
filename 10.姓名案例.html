@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - 计算属性：姓名案例</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="demo">
+    <h1>插值语法实现</h1>
+    姓：<input type="text" placeholder="请输入姓" v-model="lastName"><br/><br/>
+    名：<input type="text" placeholder="请输入名" v-model="firstName"><br/><br/>
+    姓名：<span>{{ lastName.slice(0, 3) }}{{ firstName.slice(0, 3) }}</span>
+    <h1>methods实现（性能较低）</h1>
+    姓：<input type="text" placeholder="请输入姓" v-model="lastName"><br/><br/>
+    名：<input type="text" placeholder="请输入名" v-model="firstName"><br/><br/>
+    姓名：<span>{{ getName() }}</span>
+    <h1>计算属性computed实现（缓存，性能较高）</h1>
+    姓：<input type="text" placeholder="请输入姓" v-model="lastName"><br/><br/>
+    名：<input type="text" placeholder="请输入名" v-model="firstName"><br/><br/>
+    姓名1：<span>{{ fullName }}</span><br/>
+    姓名2：<span>{{ fullName }}</span><br/>
+    姓名3：<span>{{ fullName }}</span><br/>
+    <!-- 缓存 多次使用 调用一次 -->
+</div>
+
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTip = false;
+
+    const vm = new Vue({
+        el: '#demo',
+        data: function () {
+            return {
+                firstName: "睿",
+                lastName: "陈"
+            };
+        },
+        methods: {
+            getName() {
+                return this.lastName + this.firstName;
+            }
+        },
+        // computed: {
+        //     // computed中属性后边跟方法
+        //     fullName: {
+        //         // get的作用：当有人读取fullName时，get就会被调用，返回值作为fullName的值
+        //         // get的调用时机：初次读取时、所依赖的数据发生变化时
+        //         get() {
+        //             return this.lastName + this.firstName;
+        //         },
+        //         // set的调用时机：当fullName被修改的时候
+        //         set(value) {
+        //             // 修改姓和名
+        //         }
+        //     }
+        // }
+
+        // 计算属性的简写（确定只考虑读取时）
+        computed: {
+            fullName: function (){
+                return this.lastName + this.firstName;
+            }
+        },
+    });
+</script>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

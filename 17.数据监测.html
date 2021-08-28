@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+    let data = {
+        name: "哈工大（深圳）",
+        address: "深圳大学城"
+    }
+
+    const obs = new Observer(data)
+
+    function Observer(obj) {
+        // 汇总对象所有属性，形成一个数组
+        const keys = Object.keys(obj)
+        // 遍历
+        keys.forEach((k) => {
+            Object.defineProperty(this, k, {
+                get() {
+                    return obj[k]
+                },
+                set(val) {
+                    obj[k] = val
+                }
+            })
+        })
+    }
+</script>
+</body>
+</html>

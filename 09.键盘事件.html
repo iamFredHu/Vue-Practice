@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - 键盘事件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="demo">
+    <h2>欢迎来到{{ name }}！</h2>
+    <input type="text" placeholder="按下回车提示输入数据" @keyup.enter="showInfo">
+    <!-- 没给的别名，用key值去绑定 kebab-case 注意用-连接两个单词 CapsLock caps-lock -->
+    <!-- tab一般配合keydown使用 -->
+    <input type="text" placeholder="按下空格提示输入数据" @keyup.space="showInfo">
+</div>
+
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTip = false;
+
+    const vm = new Vue({
+        el: '#demo',
+        data: function () {
+            return {
+                name: '哈尔滨工业大学（深圳)'
+            };
+        },
+        methods: {
+            showInfo(event) {
+                console.log(event.target.value);
+                console.log(event.key);
+            }
+        }
+    });
+</script>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

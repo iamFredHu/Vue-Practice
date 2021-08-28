@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - 条件渲染</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="demo">
+    <button @click="displayChange">切换显示和隐藏</button>
+    <h2>使用v-show做条件渲染（style="display: none";）</h2>
+    <h3 v-show="welDisplay">欢迎来到{{ name }}</h3>
+    <hr/>
+    <h2>使用v-if做条件渲染（代码层面消失 ）</h2>
+    <h3 v-if="welDisplay">欢迎来到{{ name }}</h3>
+    <hr/>
+    <h2>根据n的值不同展示div</h2>
+    <h3>当前的n值为{{ n }}</h3>
+    <button @click="n++">点我n+1</button>
+    <div v-show="n % 3 === 0"><h3>showDIV1</h3></div>
+    <div v-show="n % 3 === 1"><h3>showDIV2</h3></div>
+    <div v-show="n % 3 === 2"><h3>showDIV3</h3></div>
+    <div v-if="n % 3 === 0 && n !== 0"><h3>ifDIV1</h3></div>
+    <div v-else-if="n % 3 === 1"><h3>ifDIV2</h3></div>
+    <div v-else-if="n % 3 === 2"><h3>ifDIV3</h3></div>
+    <div v-else><h3>nothing</h3></div>
+    <hr/>
+    <template v-if="n % 3 === 0">
+        <h2>test1</h2>
+        <h2>test2</h2>
+        <h2>test3</h2>
+    </template>
+    <!-- 不影响页面结构 template只能和v-if一起用-->
+
+    <!-- 高频：v-show 低频：v-if（效率问题）-->
+    <!-- show改display if直接删代码 v-if不允许被打断-->
+</div>
+
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTip = false;
+
+    const vm = new Vue({
+        el: '#demo',
+        data: function () {
+            return {
+                name: "哈尔滨工业大学（深圳）",
+                welDisplay: true,
+                n: 0
+            };
+        },
+        methods: {
+            displayChange() {
+                this.welDisplay = !this.welDisplay;
+            },
+        }
+    });
+</script>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

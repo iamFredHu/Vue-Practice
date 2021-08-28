@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - 监视属性：天气案例</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="demo">
+    <h1>{{ infoOfChen }}</h1>
+    <!-- 绑定事件时可以写一些简单的语句-->
+    <!-- <button @click="isDead = !isDead">切换陈睿的死活状态</button> -->
+    <button @click="isDead = !isDead">切换陈睿的死活状态</button>
+    <hr/>
+    <h1>陈睿的死亡次数是：{{ numbers.deadTimes }}</h1>
+    <button @click="numbers.deadTimes++">点我让陈睿多死一次</button>
+    <h1>一个没用的值：{{ numbers.uselessValue }}</h1>
+    <button @click="numbers.uselessValue++">点我让没用的值加一</button>
+</div>
+
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTip = false;
+
+    const vm = new Vue({
+        el: '#demo',
+        data: function () {
+            return {
+                isDead: true,
+                numbers: {
+                    deadTimes: 1,
+                    uselessValue: 1
+                }
+            };
+        },
+        computed: {
+            infoOfChen: function () {
+                return this.isDead ? "陈睿被泥头车创创子！" : "陈睿复活了！";
+            }
+        },
+        // methods:{
+        //     switchChen(){
+        //         this.isDead =  !this.isDead;
+        //     }
+        // },
+
+        // // 监视 值为配置对象
+        // watch: {
+        //     infoOfChen: {
+        //         // immediate:true, // 初始化时直接调用一次handler
+        //         // handler 改变时调用
+        //         handler(newValue, oldValue) {
+        //             console.log("陈睿的生死簿被改了" + newValue + " " + oldValue);
+        //         }
+        //     }
+        // }
+
+        // 深度监视
+        // 监视 值为配置对象
+        // watch: {
+        //     infoOfChen: {
+        //         handler(newValue, oldValue) {
+        //             console.log("陈睿的生死簿被改了" + newValue + " " + oldValue);
+        //         }
+        //     },
+        //     numbers: {
+        //         // 深度监视 deep 监视多级结构中所有属性的变化
+        //         // watch默认不检测内部（只看一层），配置deep可以检测多层
+        //         // 当然，Vue自身无论配不配置deep都会监视多层
+        //         deep: true,
+        //         handler() {
+        //             console.log("时代变了！");
+        //         }
+        //     }
+        // }
+
+        // 监视的简写 不需要immediate和deep时可以简写
+        watch: {
+            infoOfChen() {
+                console.log("测试")
+            }
+        }
+    });
+
+    // // 另外一种写法
+    // vm.$watch('infoOfChen', {
+    //     // immediate:true, // 初始化时直接调用一次handler
+    //     // handler 改变时调用
+    //     handler(newValue, oldValue) {
+    //         console.log("陈睿的生死簿被改了" + newValue + " " + oldValue);
+    //
+    //     }
+    // })
+</script>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

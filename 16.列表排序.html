@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - 列表排序</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="demo">
+    <h2>人员列表</h2>
+    <div class="input-group">
+        <span class="input-group-addon">名字</span>
+        <input type="text" placeholder="请输入名字" v-model="keyWord" class="form-control">
+    </div>
+    <button type="button" class="btn btn-default" @click="buttonType = 2">年龄升序2</button>
+    <button type="button" class="btn btn-default" @click="buttonType = 1">年龄降序1</button>
+    <button type="button" class="btn btn-default" @click="buttonType = 0">原顺序0</button>
+    <ul class="list-group">
+        <li v-for="element in searchPerson" :key="element.id" class="list-group-item">{{ element.name }}-{{
+                element.age
+            }}-{{ element.sex }}
+        </li>
+        <!-- key的作用，让每一个li有一个唯一的id（标识） -->
+    </ul>
+
+</div>
+
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTip = false;
+
+    const vm = new Vue({
+        el: '#demo',
+        data: function () {
+            return {
+                keyWord: '',
+                buttonType: 0, //0代表原顺序 1代表降序 2代表升序
+                personList: [
+                    {
+                        id: '001',
+                        name: "张三",
+                        age: 25,
+                        sex: "男"
+                    },
+                    {
+                        id: '002',
+                        name: "李四",
+                        age: 19,
+                        sex: "女"
+                    },
+                    {
+                        id: '003',
+                        name: "王五",
+                        age: 20,
+                        sex: "男"
+                    },
+                ],
+            };
+        },
+        methods: {},
+        computed: {
+            searchPerson() {
+                const tempArr = this.personList.filter((p) => {
+                    return p.name.indexOf(this.keyWord) !== -1;
+                });
+                if (this.buttonType) {
+                    tempArr.sort((a,b)=>{
+                        return this.buttonType === 1 ? b.age-a.age:a.age-b.age;
+                    });
+                };
+                return tempArr;
+            },
+        }
+    });
+</script>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

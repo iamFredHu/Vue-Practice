@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - Model</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="demo">
+    <!-- DOM -> View -->
+    <h1>名称：{{ name }}</h1>
+    <h1>地址：{{ address }}</h1>
+    <h1>测试（isVue）：{{ _isVue }}</h1>
+</div>
+
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTip = false;
+
+    // Vue -> ViewModel
+    const vm = new Vue({
+        el: '#demo',
+        data: function () {
+            return {
+                name: "哈尔滨工业大学（深圳）",
+                address: "深圳市"
+            };
+            // Obj -> Model
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - 收集表单数据</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="demo">
+    <form role="form" @submit.prevent="stopSubmit">
+        <div class="form-group">
+            <label for="username">账号</label>
+            <input type="text" class="form-control" id="username" placeholder="请输入账号" v-model.trim="username">
+        </div>
+        <div class="form-group">
+            <label for="password">密码</label>
+            <input type="password" class="form-control" id="password" placeholder="请输入密码" v-model="password">
+        </div>
+        <div class="form-group">
+            <label for="age">年龄</label>
+            <input type="number" class="form-control" id="age" placeholder="请输入年龄" v-model.number="age">
+        </div>
+        <label>性别</label>
+        <div class="form-group">
+            <label class="radio-inline">
+                <input type="radio" name="optionsRadiosinline" id="sexMale" value="男" v-model="sex"> 男
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="optionsRadiosinline" id="sexFemale" value="女" v-model="sex"> 女
+            </label>
+        </div>
+        <label>爱好</label>
+        <div class="checkbox">
+            <label><input type="checkbox" value="学习" v-model="hobby">学习</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" value="二次元" v-model="hobby">二次元</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" value="游戏" v-model="hobby">游戏</label>
+        </div>
+        <!-- checkbox 需要自行配置value值 用数组Array收集 -->
+        <label>校区</label>
+        <br/>
+        <!-- 注意在select中进行绑定 -->
+        <select v-model="location">
+            <option value="">请选择校区</option>
+            <option value="哈尔滨">哈尔滨</option>
+            <option value=威海">威海</option>
+            <option value="深圳">深圳</option>
+        </select>
+        <br/>
+        <label>其他信息</label>
+        <br/>
+        <!-- lazy 失去焦点的时候再收集 -->
+        <textarea v-model.lazy="info"></textarea>
+        <br/>
+        <input type="checkbox" v-model="agreement">
+        阅读并接受<a href="#">《用户协议》</a>
+
+        <button type="submit" class="btn btn-default">提交</button>
+    </form>
+</div>
+
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTip = false;
+
+    const vm = new Vue({
+        el: '#demo',
+        data: function () {
+            return {
+                username: '',
+                password: '',
+                age: '',
+                sex: '',
+                hobby: [],
+                location: '',
+                info: '',
+                agreement: '',
+            };
+        },
+        methods: {
+            stopSubmit() {
+                console.log(JSON.stringify(this._data));
+            }
+        }
+    });
+</script>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

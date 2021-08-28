@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - 数据代理</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="demo">
+    <h2>学校名称：{{ name }}</h2>
+    <h2>学校地址：{{ address }}</h2>
+</div>
+
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTip = false;
+
+    // let numberAge = 18;
+    // let person = {
+    //     name: "张三",
+    //     sex: "男",
+    // }
+
+    // Object.defineProperty(person, 'age', {
+    //     value: 18,
+    //     enumerable:true, // 默认为 不可枚举 不参与遍历
+    //     writable:true, // 默认不可修改
+    //     configurable:true // 默认不可删除
+    // })
+
+    // Object.defineProperty(person, 'age', {
+    //     // 当有人读取person的age属性时，get函数(getter)就会被调用，返回值就是age的值
+    //     get() {
+    //         return numberAge;
+    //     },
+    //
+    //     // 当有人修改person的age属性是，set函数（setter）就会被调用，且会受到修改值
+    //     set(value){
+    //         console.log(value);
+    //         numberAge = value;
+    //     }
+    // });
+    //
+    // console.log(person)
+
+    // 数据代理
+    // let obj = {
+    //     x:100
+    // }
+    //
+    // let obj2 = {
+    //     y:200
+    // }
+    //
+    // Object.defineProperty(obj2,'x',{
+    //     get()
+    //     {
+    //         return obj.x;
+    //     },
+    //     set(value)
+    //     {
+    //         obj.x = value;
+    //     }
+    // })
+
+    // Vue中对数据代理的应用
+
+    const vm = new Vue({
+        el: '#demo',
+        data: function () {
+            return {
+                name:"哈尔滨工业大学（深圳）",
+                address:"深圳大学城"
+            };
+        }
+    });
+</script>
+</html>

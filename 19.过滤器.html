@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - 过滤器</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.10.6/dayjs.min.js"></script>
+</head>
+<body>
+<div id="demo">
+    <h2>显示格式化后的时间（可以用computed、也可以用methods）</h2>
+    <h3>computed：{{ comTime }}</h3>
+    <h3>methods：{{ getTime() }}</h3>
+    <h3>过滤器实现：{{ Date.now() | timeFormat }}</h3>
+    <!-- 过滤器在 Vue3 中已经被废弃 -->
+</div>
+
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTip = false
+
+
+    const vm = new Vue({
+        el: '#demo',
+        data: function () {
+            return {}
+        },
+        computed: {
+            comTime() {
+                return dayjs().format('YYYY-MM-DD HH:mm:ss')
+            }
+        },
+        methods: {
+            getTime() {
+                return dayjs().format('YYYY-MM-DD HH:mm:ss')
+            }
+        },
+        filters: {
+            timeFormat(value) {
+                return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
+            }
+        }
+    })
+</script>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

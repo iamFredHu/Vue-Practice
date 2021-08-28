@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - Model</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="demo">
+    <h2>欢迎来到{{ name }}！</h2>
+    <button v-on:click="showInfo1">点我提示信息1（不传参）</button>
+    <button @click="showInfo2(123,$event)">点我提示信息123简写（传参）</button>
+    <!-- 传参数 -->
+</div>
+
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTip = false;
+
+    const vm = new Vue({
+        el: '#demo',
+        data: function () {
+            return {
+                name: '哈尔滨工业大学（深圳)'
+            };
+        },
+        // methods 用于配置事件的回调
+        methods: {
+            showInfo1(event) {
+                // event.target 事件的目标==> 按钮
+                alert("text1");
+            },
+            showInfo2(number,event) {
+                alert(event.target);
+                alert(number);
+            }
+        }
+    });
+
+</script>
+</html>

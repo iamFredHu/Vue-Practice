@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - 自定义指令</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<!-- 定义一个 v-bigger 放大10倍 类似v-text -->
+<!-- 定义一个 v-fbind  类似v-bind 但是其绑定的input元素需要默认获取焦点 -->
+<div id="demo">
+    <h2>当前的n值是<span v-text="n"></span></h2>
+    <h2>放大10倍后的n值是<span v-bigger="n"></span></h2>
+    <button @click="n++" class="btn-info">点我n++</button>
+    <hr/>
+    <input type="text" v-fbind:value="n">
+</div>
+
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+        el: '#demo',
+        data: function () {
+            return {
+                n: 1,
+            }
+        },
+        directives: {
+            // 写成函数的调用时机：1.指令与元素成功绑定时 2、指令所在模板重新被解析时
+            bigger(element, binding) {
+                element.innerText = binding.value * 10
+                //element指DOM元素 binding 指v-bigger绑定的内容
+            },
+            // 写成对象
+            fbind: {
+                // 指令与元素成功绑定时 调用函数
+                bind(element,binding) {
+                    element.value = binding.value
+                },
+                // 指令所在元素被插入页面时调用
+                inserted(element,binding) {
+                    element.focus()
+                },
+                // 指令所在模板被重新解析时调用
+                update(element,binding) {
+                    element.value = binding.value
+                }
+            }
+        }
+    })
+</script>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

@@ -1,28 +1,27 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <School zh-name="哈尔滨工业大学（深圳）" en-name="Harbin Institute of Technology, Shenzhen" :age='20'></School>
+    <Institute zh-name="计算机科学与技术学院" en-name="Institute of Computer Science and Technology" :age='18'></Institute>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+
+import School from "../src/components/School";
+import Institute from "@/components/Institute";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Institute,
+    School
+  },
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
 }
 </style>

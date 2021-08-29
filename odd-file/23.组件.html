@@ -20,6 +20,8 @@
     <school></school>
     <hr/>
     <student></student>
+    <student></student>
+    <student></student>
 </div>
 
 </body>
@@ -28,7 +30,20 @@
     Vue.config.productionTip = false
 
     // 创建school组件
+    // const school = {
+    // name:'myschool', // 这里影响vue的开发者工具中呈现的名字
+    //     data: function () {
+    //     return {
+    //         schoolName: "哈尔滨工业大学（深圳）",
+    //         schoolAddress: "深圳大学城"
+    //     }
+    // },
+    // template: `
+    //       <div><h2>学校名称：{{ schoolName }}</h2>
+    //       <h2>学校地址：{{ schoolAddress }}</h2></div>`
+    // }
     const school = Vue.extend({
+        name:'myschool', // 这里影响vue的开发者工具中呈现的名字
         data: function () {
             return {
                 schoolName: "哈尔滨工业大学（深圳）",
@@ -39,6 +54,7 @@
           <div><h2>学校名称：{{ schoolName }}</h2>
           <h2>学校地址：{{ schoolAddress }}</h2></div>`
     })
+
     // 全局注册
     Vue.component('school',school)
 

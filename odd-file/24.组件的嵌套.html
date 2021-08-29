@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - 组件嵌套</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="demo">
+</div>
+
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTip = false
+
+    const com1child = {
+        template: `
+          <div>
+          <p>组件1名称: {{ com1Name }}</p>
+          <p>组件1测试文本: {{ com1Text }}</p>
+          </div>
+        `,
+        data: function () {
+            return {
+                com1Name: '组件1',
+                com1Text: '文本1',
+            }
+        },
+    }
+
+    // 嵌套组件只能在被定义的地方的template里面用
+    const com1 = {
+        template: `
+          <div>
+          <h2>组件1名称: {{ com1Name }}</h2>
+          <h2>组件1测试文本: {{ com1Text }}</h2>
+          <com1child></com1child>
+          </div>
+        `
+        ,
+        data: function () {
+            return {
+                com1Name: '组件1',
+                com1Text: '文本1',
+            }
+        },
+        components: {
+            com1child: com1child
+        }
+    }
+
+    const com2 = {
+        template:
+                `
+                  <div>
+                  <h2>组件2名称: {{ com2Name }}</h2>
+                  <h2>组件2测试文本: {{ com2Text }}</h2>
+                  </div>
+                `
+        ,
+        data: function () {
+            return {
+                com2Name: '组件2',
+                com2Text: '文本2',
+            }
+        },
+    }
+
+    const app = {
+        template: `
+          <div>
+          <com1></com1>
+          <hr/>
+          <com2></com2>
+          </div>
+        `,
+        components: {
+            com1: com1,
+            com2: com2
+        }
+    }
+
+    new Vue({
+        el: '#demo',
+        template: `
+          <app></app>`,
+        components: {
+            app: app
+        }
+    })
+</script>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

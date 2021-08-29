@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue - VueComponent构造函数</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="demo">
+
+</div>
+<hr/>
+<h3>组件本质上是一个名为VueComponents的构造函数，并非我们定义，而是Vue.extend生成的<br/>
+    只需要写组件标签,Vue会帮我们创建组建的实例对象<br/>每次调用Vue.extend，会返回一个新的VueComponents（现定义，再返回）<br/>
+    组件中的this 是VueComponent的实例对象 vm中的this是Vue的实例对象 VueComponent其实是和Vue类似的，该有的都有
+</h3><br>
+<h1>VueComponent.prototype.__proto__ === Vue.prototype</h1>
+</body>
+<script type="text/javascript">
+    // 关闭启动时的生产提示
+    Vue.config.productionTip = false
+
+    const com1 = {
+        template: `
+          <div>
+          <h2>组件1名称: {{ com1Name }}</h2>
+          <h2>组件1测试文本: {{ com1Text }}</h2>
+          </div>
+        `
+        ,
+        data: function () {
+            return {
+                com1Name: '组件1',
+                com1Text: '文本1',
+            }
+        },
+    }
+
+    console.log(com1) // 本质是构造函数
+
+    new Vue({
+        el: '#demo',
+        template: `
+          <com1></com1>`,
+        components: {
+            com1: com1
+        }
+    })
+</script>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

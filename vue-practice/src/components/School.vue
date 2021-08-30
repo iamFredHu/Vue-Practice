@@ -3,10 +3,11 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span @click="showZhName">{{ zhName }}</span>
-        <el-button style="float: right; padding: 3px 0" type="text">{{ btnName }}</el-button>
+        <el-button @click='sendSchoolName' style="float: right; padding: 3px 0" type="text">{{ btnName }}</el-button>
       </div>
       <div>英文名：{{ enName }}</div>
       <div>历史：{{ newAge }}年</div>
+      <button @click="unbind">解绑事件</button>
     </el-card>
   </div>
 </template>
@@ -28,6 +29,16 @@ export default {
       newAge: this.age + 1
     }
   },
+  methods:{
+    sendSchoolName(){
+      this.getSchoolName(this.zhName)
+    },
+    unbind(){
+      // this.$off('getSchoolName') // 解绑一个自定义事件 如果是多个事件，则需要写在一个数组当中
+      // 如果要解绑所有事件，不填参数
+      this.$off()
+    }
+  },
   // mixins: [mixin],
   props: {
     zhName: {
@@ -41,12 +52,16 @@ export default {
     btnName: {
       type: String,
       // required:false, 默认就是false
-      default: '进入网站'
+      default: '传输数据'
     },
     age: {
       type: Number,
       required: true
     },
+    getSchoolName:{
+      type:Function,
+      required:false
+    }
   }
 }
 </script>

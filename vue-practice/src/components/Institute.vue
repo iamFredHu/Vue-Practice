@@ -3,7 +3,7 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span @click="showZhName">{{ zhName }}</span>
-        <el-button style="float: right; padding: 3px 0" type="text">{{ btnName }}</el-button>
+        <el-button @click='sendInstituteName' style="float: right; padding: 3px 0" type="text">{{ btnName }}</el-button>
       </div>
       <div>英文名：{{ enName }}</div>
       <div>历史：{{ newAge }}年</div>
@@ -23,6 +23,12 @@ export default {
   //   btnName:String,
   //   age:Number
   // }
+  methods: {
+    sendInstituteName() {
+      // 触发App组件上事件
+      this.$emit('getInsName', this.zhName)
+    }
+  },
   data() {
     return {
       newAge: this.age + 1
@@ -41,7 +47,7 @@ export default {
     btnName: {
       type: String,
       // required:false, 默认就是false
-      default: '进入网站'
+      default: '传输数据'
     },
     age: {
       type: Number,

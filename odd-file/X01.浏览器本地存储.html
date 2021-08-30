@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Local Storage & Session Storage</title>
+</head>
+<body>
+<h2>localStorage</h2>
+<button onclick="saveData()">点我保存数据</button>
+<button onclick="readData()">点我读取数据</button>
+<button onclick="deleteData()">点我删除数据</button>
+<button onclick="clearData()">点我清空数据</button>
+
+<script>
+    let p = {name: '张三', age: 18}
+
+    function saveData() {
+        // 必须存字符串 如果是Number类型，会强制转换成str
+        localStorage.setItem('msg', 'hello')
+        localStorage.setItem('person', JSON.stringify(p))
+    }
+
+    function readData() {
+        console.log(JSON.parse(localStorage.getItem('person')))
+    }
+
+    function deleteData() {
+        localStorage.removeItem('msg')
+    }
+
+    function clearData() {
+        localStorage.clear()
+    }
+
+// sessionStorage和localStorage类似，只不过浏览器对话一关闭，就结束了
+
+</script>
+</body>
+</html>
